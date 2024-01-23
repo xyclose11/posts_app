@@ -24,6 +24,20 @@ export async function getServerSideProps() {
   }
 }
 
+export async function getIsbn() {
+  try {
+    let response = await fetch('http://lx2.loc.gov:210/lcdb?version=1.1&operation=searchRetrieve&query=dc.title=dinosaur');
+    let responseData = await response.json();
+
+    return {
+      props: { responseData: JSON.parse(JSON.stringify(responseData))},
+    }
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 
 
 export default function Posts(props: Props) {
